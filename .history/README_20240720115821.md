@@ -1,0 +1,2 @@
+# AIcademia
+BAM Summer 2024 Hackathon
