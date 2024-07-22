@@ -1,11 +1,21 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
+from secret import *
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
+from flask_mail import Mail, Message
 app = Flask(__name__)
+app.config['SECRET_KEY'] = secret_key
+
+# Flask-Mail configuration
+app.config['MAIL_SERVER'] = 'smtp.yourmailserver.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'your_email@example.com'
+app.config['MAIL_PASSWORD'] = 'your_email_password'
+mail = Mail(app)
+#Creating Database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
-
 class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(200), nullable = False)
@@ -29,6 +39,24 @@ def about():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+
+#For sending the email(NOT WORKING ATM)
+@app.route('/send_email', methods=['POST'])
+def send_email():
+    email = request.form['email']
+    subject = request.form['subject']
+    message = request.form['message']
+
+    msg = Message(subject, sender=email, recipients=['recipient@example.net'])
+    msg.body = message
+
+    try:
+        mail.send(msg)
+        return 'Email sent successfully!'
+    except Exception as e:
+        return str(e)
+
 
 @app.route('/project')
 def project():
