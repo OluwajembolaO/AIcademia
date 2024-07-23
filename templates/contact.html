@@ -60,14 +60,7 @@
                         <a href="{{ url_for('about') }}" class="nav-item nav-link">About</a>
                         <a href="{{ url_for('service') }}" class="nav-item nav-link">Service</a>
                         <a href="{{ url_for('project') }}" class="nav-item nav-link">Project</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu m-0">
-                                <a href="{{ url_for('team') }}" class="dropdown-item">Our Team</a>
-                                <a href="{{ url_for('testimonial') }}" class="dropdown-item">Testimonial</a>
-                                <a href="{{ url_for('error') }}" class="dropdown-item active">404 Page</a>
-                            </div>
-                        </div>
+                        <a href="{{ url_for('team') }}" class="nav-item nav-link">Our Team</a>
                         <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contact</a>
                     </div>
                     <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
