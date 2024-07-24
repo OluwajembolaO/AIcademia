@@ -32,3 +32,8 @@ pip install -r requirements.txt
 - Added Bar Graphs for future statistics
 - Added more information in the home page
 - Added/Swapped new images for the website
+
+7/23/24
+- Added Login Page
+- Added Sign Up Page
+- Added Log out
