@@ -47,7 +47,7 @@ def login():
                 return redirect(url_for('index'))
             else:
                 error_message = "Incorrect password. Please try again."
-                return render_template('signIn.html', error=error_message)
+                return render_template('login.html', error=error_message)
 
     return render_template('login.html')
 

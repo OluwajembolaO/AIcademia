@@ -37,3 +37,4 @@ pip install -r requirements.txt
 - Added Login Page
 - Added Sign Up Page
 - Added Log out
+- Fixed Commit/Push conflict
