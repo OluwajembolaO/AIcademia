@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, session, request
 from secret import *
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
@@ -24,9 +24,67 @@ class User(db.Model):
     password = db.Column(db.String(50), nullable = False)
 
 
-@app.route('/')
+@app.route('/index')
 def index():
     return render_template('index.html')
+
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    if request.method == "POST":
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        # Replace with your database query logic
+        # Example assumes User model has 'name' and 'password' fields
+        user = User.query.filter_by(name=username).first()
+
+        if user is None:
+            error_message = f"This username ({username}) doesn't exist. Please try again."
+            return render_template('signIn.html', error=error_message)
+        else:
+            if user.password == password:
+                session['username'] = user.name  # Store the username in the session
+                return redirect(url_for('index'))
+            else:
+                error_message = "Incorrect password. Please try again."
+                return render_template('signIn.html', error=error_message)
+
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)  # Clear the username from the session
+    return redirect(url_for('login'))
+
+
+@app.route('/signup', methods = ['GET', 'POST'])
+def signup():
+    if request.method == "POST":
+        userName = request.form.get('name')
+        pwd = request.form.get('password')
+        email = request.form.get('email')
+        
+        emailExsist = User.query.filter_by(email = email).first()
+        userNameExsist = User.query.filter_by(name = userName).first()
+        
+        if emailExsist:
+            error_message = f"This email ({email}) already exists."
+            return render_template('signup.html', error=error_message)
+        elif userNameExsist:
+            error_message = f"This username ({userName}) already exists."
+            return render_template('signup.html', error=error_message)
+        elif len(pwd) < 5:
+            error_message = "Your password is too short. It must be at least 8 characters long."
+            return render_template('signup.html', error=error_message)
+        else:
+            newUser = User(name = userName, email = email, password = pwd)
+            db.session.add(newUser)
+            db.session.commit()
+                  
+        print(userName, pwd, email)
+        session['username'] = userName  # Store the username in the session
+        return redirect(url_for('index'))
+    return render_template('signup.html')
 
 @app.route('/error')
 def error():
@@ -77,4 +135,6 @@ def testimonial():
 
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug = True)
