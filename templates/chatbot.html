@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+<!-- Favicon -->
+<link href="img/favicon.ico" rel="icon">
+
+<!-- Google Web Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Jost:wght@500;600;700&display=swap" rel="stylesheet"> 
+
+<!-- Icon Font Stylesheet -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+<link href="{{ url_for('static', filename='fontawesome/css/fontawesome.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='fontawesome/css/brands.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='fontawesome/css/solid.css') }}" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Libraries Stylesheet -->
+<link href="{{ url_for('static', filename = 'css/lib/animate/animate.min.css')}}" rel="stylesheet">
+<link href="{{ url_for('static', filename = 'css/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+<link href="{{ url_for('static', filename = 'css/lib/lightbox/css/lightbox.min.css')}}" rel="stylesheet">
+
+<!-- Customized Bootstrap Stylesheet -->
+<link href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}" rel="stylesheet">
+
+<!-- Template Stylesheet -->
+<link href="{{ url_for('static', filename = 'css/style.css')}}" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box">
+            <div class="message-list">
+                {% for message in messages %}
+                    <div class="{{ message.role }}-message">
+                        <p>{{ message.content }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <form id="chat-form">
+            <input type="text" id="user-input" name="user_input" placeholder="Type your message here..." required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('chat-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    let userInput = document.getElementById('user-input').value;
+
+    fetch('/', {  // Ensure this URL matches your Flask route
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({ 'user_input': userInput })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        let messageList = document.querySelector('.message-list');
+        messageList.innerHTML += '<div class="user-message"><p>' + userInput + '</p></div>';
+        messageList.innerHTML += '<div class="assistant-message"><p>' + data.response + '</p></div>';
+        document.getElementById('user-input').value = '';
+        messageList.scrollTop = messageList.scrollHeight; // Scroll to bottom
+    })
+    .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+    });
+});
+
+    </script>
+</body>
+</html>

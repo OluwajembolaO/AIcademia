@@ -1,11 +1,12 @@
-from flask import Flask, render_template, redirect, url_for, request, session, request
+from flask import Flask, render_template, redirect, url_for, request, session, request, jsonify
 from secret import *
 from flask_sqlalchemy import SQLAlchemy
+from ai import *
 from datetime import datetime
 from flask_mail import Mail, Message
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secret_key
-
+messages = []
 # Flask-Mail configuration
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
@@ -28,7 +29,34 @@ class User(db.Model):
 def index():
     return render_template('index.html')
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=["GET", "POST"])
+def chatbot():
+    global messages
+
+    if request.method == "POST":
+        user_input = request.form["user_input"]
+        messages.append({
+            "role": "user",
+            "content": user_input
+        })
+
+        # Prepare prompt for the new model
+        conversation = "\n".join([f"{msg['role'].capitalize()}: {msg['content']}" for msg in messages])
+        ai_response = getResponse(conversation)
+
+        messages.append({
+            "role": "assistant",
+            "content": ai_response
+        })
+
+        return jsonify({"response": ai_response})
+
+    # For GET requests, render the chat interface
+    return render_template('chatbot.html', messages=messages)
+
+
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == "POST":
         username = request.form.get('username')
@@ -40,7 +68,7 @@ def login():
 
         if user is None:
             error_message = f"This username ({username}) doesn't exist. Please try again."
-            return render_template('signIn.html', error=error_message)
+            return render_template('login.html', error=error_message)
         else:
             if user.password == password:
                 session['username'] = user.name  # Store the username in the session
