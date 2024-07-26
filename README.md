@@ -38,3 +38,14 @@ pip install -r requirements.txt
 - Added Sign Up Page
 - Added Log out
 - Fixed Commit/Push conflict
+
+
+7/24/24
+- Added little changes
+
+7/25/24
+-Added little changes
+- Wondering how to add AI (needed a key)
+
+7/26/24
+ - AI chatbot has been made(with memory intact)
