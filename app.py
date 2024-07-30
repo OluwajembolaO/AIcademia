@@ -25,11 +25,11 @@ class User(db.Model):
     password = db.Column(db.String(50), nullable = False)
 
 
-@app.route('/index')
+@app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/', methods=["GET", "POST"])
+@app.route('/chatbot', methods=["GET", "POST"])
 def chatbot():
     global messages
 

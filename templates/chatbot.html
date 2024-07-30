@@ -29,16 +29,20 @@
 
 <!-- Template Stylesheet -->
 <link href="{{ url_for('static', filename = 'css/style.css')}}" rel="stylesheet">
+<link href="{{ url_for('static', filename = 'css/chatbot.css')}}" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="chat-container">
-        <div class="chat-box">
+        <div class = "chat-header">
+            <h1>AIcademia</h1>   
+        </div>
+        <div class="chat-box" id = "chat-box">
             <div class="message-list">
                 {% for message in messages %}
                     <div class="{{ message.role }}-message">
-                        <p>{{ message.content }}</p>
+                        <p class="d-flex flex-row justify-content-start mb-4">{{ message.content }}</p>
                     </div>
                 {% endfor %}
             </div>
@@ -68,8 +72,8 @@
     })
     .then(data => {
         let messageList = document.querySelector('.message-list');
-        messageList.innerHTML += '<div class="user-message"><p>' + userInput + '</p></div>';
-        messageList.innerHTML += '<div class="assistant-message"><p>' + data.response + '</p></div>';
+        messageList.innerHTML += '<div class="d-flex flex-row justify-content-start mb-4"><div class="assistant-message"><div class="user-message"><p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">' + userInput + '</p></div></div>';
+        messageList.innerHTML += '<div class="d-flex flex-row justify-content-start mb-4"><div class="assistant-message"><p class="d-flex flex-row justify-content-start mb-4">' + data.response + '</p></div></div>';
         document.getElementById('user-input').value = '';
         messageList.scrollTop = messageList.scrollHeight; // Scroll to bottom
     })
