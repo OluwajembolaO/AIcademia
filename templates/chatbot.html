@@ -3,47 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot</title>
-<!-- Favicon -->
-<link href="img/favicon.ico" rel="icon">
-
-<!-- Google Web Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500&family=Jost:wght@500;600;700&display=swap" rel="stylesheet"> 
-
-<!-- Icon Font Stylesheet -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-<link href="{{ url_for('static', filename='fontawesome/css/fontawesome.css') }}" rel="stylesheet">
-<link href="{{ url_for('static', filename='fontawesome/css/brands.css') }}" rel="stylesheet">
-<link href="{{ url_for('static', filename='fontawesome/css/solid.css') }}" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-<!-- Libraries Stylesheet -->
-<link href="{{ url_for('static', filename = 'css/lib/animate/animate.min.css')}}" rel="stylesheet">
-<link href="{{ url_for('static', filename = 'css/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
-<link href="{{ url_for('static', filename = 'css/lib/lightbox/css/lightbox.min.css')}}" rel="stylesheet">
-
-<!-- Customized Bootstrap Stylesheet -->
-<link href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}" rel="stylesheet">
-
-<!-- Template Stylesheet -->
-<link href="{{ url_for('static', filename = 'css/style.css')}}" rel="stylesheet">
-<link href="{{ url_for('static', filename = 'css/chatbot.css')}}" rel="stylesheet">
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Chat Message Example</title>
+    <link href="{{ url_for('static', filename = 'css/chatbot.css')}}" rel="stylesheet">
 </head>
 <body>
     <div class="chat-container">
-        <div class = "chat-header">
-            <h1>AIcademia</h1>   
+        <div class="chat-header">
+            <h1>Chat Interface</h1>
         </div>
-        <div class="chat-box" id = "chat-box">
+        <div class="chat-box">
             <div class="message-list">
                 {% for message in messages %}
-                    <div class="{{ message.role }}-message">
-                        <p class="d-flex flex-row justify-content-start mb-4">{{ message.content }}</p>
-                    </div>
+                    {% if message.role == 'user' %}
+                        <div class="message user-message">
+                            <p>{{message.content}}</p>
+                        </div>
+                    {% else %}
+                        <div class="message assistant-message">
+                            <p>{{message.content}}</p>
+                        </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
@@ -72,8 +51,8 @@
     })
     .then(data => {
         let messageList = document.querySelector('.message-list');
-        messageList.innerHTML += '<div class="d-flex flex-row justify-content-start mb-4"><div class="assistant-message"><div class="user-message"><p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">' + userInput + '</p></div></div>';
-        messageList.innerHTML += '<div class="d-flex flex-row justify-content-start mb-4"><div class="assistant-message"><p class="d-flex flex-row justify-content-start mb-4">' + data.response + '</p></div></div>';
+        messageList.innerHTML += '<div class="message user-message"><p>'+ userInput +'</p></div>';
+        messageList.innerHTML += '<div class="message assistant-message"><p>' +data.response+ '</p></div>';
         document.getElementById('user-input').value = '';
         messageList.scrollTop = messageList.scrollHeight; // Scroll to bottom
     })

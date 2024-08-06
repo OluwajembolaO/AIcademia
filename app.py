@@ -7,13 +7,6 @@ from flask_mail import Mail, Message
 app = Flask(__name__)
 app.config['SECRET_KEY'] = secret_key
 messages = []
-# Flask-Mail configuration
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'your_email@example.com'
-app.config['MAIL_PASSWORD'] = 'your_email_password'
-mail = Mail(app)
 #Creating Database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
@@ -25,11 +18,11 @@ class User(db.Model):
     password = db.Column(db.String(50), nullable = False)
 
 
-@app.route('/')
+@app.route('/index')
 def index():
     return render_template('index.html')
 
-@app.route('/chatbot', methods=["GET", "POST"])
+@app.route('/', methods=["GET", "POST"])
 def chatbot():
     global messages
 
@@ -53,8 +46,6 @@ def chatbot():
 
     # For GET requests, render the chat interface
     return render_template('chatbot.html', messages=messages)
-
-
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -114,10 +105,6 @@ def signup():
         return redirect(url_for('index'))
     return render_template('signup.html')
 
-@app.route('/error')
-def error():
-    return render_template('404.html')
-
 @app.route('/about')
 def about():
     return render_template('about.html')
@@ -125,24 +112,6 @@ def about():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
-
-
-#For sending the email(NOT WORKING ATM)
-@app.route('/send_email', methods=['POST'])
-def send_email():
-    email = request.form['email']
-    subject = request.form['subject']
-    message = request.form['message']
-
-    msg = Message(subject, sender=email, recipients=['recipient@example.net'])
-    msg.body = message
-
-    try:
-        mail.send(msg)
-        return 'Email sent successfully!'
-    except Exception as e:
-        return str(e)
-
 
 @app.route('/project')
 def project():
@@ -159,6 +128,23 @@ def team():
 @app.route('/testimonial')
 def testimonial():
     return render_template('testimonial.html')
+
+@app.route('/upload1')
+def upload():
+    return render_template('upload.html')
+
+@app.route('/upload2', methods=['POST'])
+def upload_file():
+    if 'file' not in request.files:
+        return "No file part", 400
+    file = request.files['file']
+    if file.filename == '':
+        return "No selected file", 400
+    responce = getResponse(imageToText(file))
+    print(responce)
+    # Render the result page with the extracted text
+    return render_template('result.html', responce=responce)
+
 
 
 

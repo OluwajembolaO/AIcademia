@@ -1,6 +1,6 @@
 from openai import AzureOpenAI
 from secret import *
-
+import io
 #Setting up AI
 AOAI_ENDPOINT = AZURE_OPENAI_ENDPOINT
 AOAI_KEY = AZURE_OPENAI_API_KEY 
@@ -24,3 +24,28 @@ def getResponse(prompt):
     ai_responce = (response.choices[0].message.content)
 
     return ai_responce
+
+
+from PIL import Image
+import pytesseract
+
+# Specify the path to tesseract executable if it is not in your PATH
+# pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'  # Windows example
+
+def imageToText_Depreciated(path):
+    image = Image.open(path)
+    #image = Image.open(io.BytesIO(path.read()))
+    # Use Tesseract to do OCR on the image
+    text = pytesseract.image_to_string(image)
+
+    # Print the extracted text
+    return text
+
+
+def imageToText(path):
+    image = Image.open(io.BytesIO(path.read()))
+    # Use Tesseract to do OCR on the image
+    text = pytesseract.image_to_string(image)
+
+    # Print the extracted text
+    return text
