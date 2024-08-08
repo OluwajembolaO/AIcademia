@@ -48,7 +48,6 @@
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="" class="navbar-brand p-0">
                     <h1 class="m-0">AIcademia</h1>
-                    <img src="img/logo.png" alt="Logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
@@ -60,21 +59,9 @@
                         <a href="{{ url_for('service') }}" class="nav-item nav-link">Service</a>
                         <a href="{{ url_for('project') }}" class="nav-item nav-link">Project</a>
                         <a href="{{ url_for('team') }}" class="nav-item nav-link">Our Team</a>
-                        <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contact</a>
+                        <a href="{{ url_for('donate') }}" class="nav-item nav-link">Donate</a>
                     </div>
                     
-                    <div class="navbar-nav ms-auto">
-                        {% if session.username %}
-                        <div class="nav-item dropdown">
-                            <h1 class="nav-item nav-link" style = "font-size: 45px; margin-bottom: -15px;">{{ session.username|capitalize }}</h1>
-                            <div class="dropdown-menu m-0">
-                                <a href="/logout" class="dropdown-item">Log Out</a>
-                            </div>
-                        </div>
-                        {% else %}
-                            <a href="#" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
-                        {% endif %}
-                    </div>
                 </div>
                 
             </nav>
@@ -86,7 +73,6 @@
                             <h1 class="text-white mb-4 animated slideInDown">Equal Education For Everyone!</h1>
                             <p class="text-white pb-3 animated slideInDown">AIcademia stands as a beacon of educational equity, committed to breaking down barriers and ensuring every student has access to quality learning opportunities. Our mission is to empower learners worldwide, regardless of background or circumstance, by delivering a comprehensive range of educational resources and tools.</p>
                             <a href="{{url_for('about')}}" class="btn btn-secondary py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Read More</a>
-                            <a href="" class="btn btn-light py-sm-3 px-sm-5 rounded-pill animated slideInRight">Contact Us</a>
                         </div>
                         <div class="col-lg-6 text-center text-lg-start">
                             <img class="img-fluid rounded-pill zoomIn" src="{{ url_for('static', filename='img/equal_education.jpg') }}" alt="Hero Image">

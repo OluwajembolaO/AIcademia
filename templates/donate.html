@@ -30,7 +30,6 @@
 
     <!-- Template Stylesheet -->
     <link href="{{ url_for('static', filename = 'css/style.css')}}" rel="stylesheet">
-
 </head>
 
 <body>
@@ -49,7 +48,6 @@
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="" class="navbar-brand p-0">
                     <h1 class="m-0">AIcademia</h1>
-                    <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
@@ -61,37 +59,23 @@
                         <a href="{{ url_for('service') }}" class="nav-item nav-link">Service</a>
                         <a href="{{ url_for('project') }}" class="nav-item nav-link">Project</a>
                         <a href="{{ url_for('team') }}" class="nav-item nav-link">Our Team</a>
-                        <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contact</a>
+                        <a href="{{ url_for('donate') }}" class="nav-item nav-link">Donate</a>
                     </div>
                     
-                    <div class="navbar-nav ms-auto">
-                        {% if session.username %}
-                        <div class="nav-item dropdown">
-                            <h1 class="nav-item nav-link" style = "font-size: 45px; margin-bottom: -15px;">{{ session.username|capitalize }}</h1>
-                            <div class="dropdown-menu m-0">
-                                <a href="/logout" class="dropdown-item">Log Out</a>
-                            </div>
-                        </div>
-                        {% else %}
-                            <a href="#" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
-                        {% endif %}
-                    </div>
                 </div>
+                
             </nav>
 
-            <div class="container-xxl py-5 bg-primary hero-header">
-                <div class="container my-5 py-5 px-lg-5">
-                    <div class="row g-5 py-5">
-                        <div class="col-12 text-center">
-                            <h1 class="text-white animated slideInDown">Contact</h1>
-                            <hr class="bg-white mx-auto mt-0" style="width: 90px;">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb justify-content-center">
-                                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                                    <li class="breadcrumb-item text-white active" aria-current="page">Contact</li>
-                                </ol>
-                            </nav>
+            <div class="container-xxl bg-primary hero-header">
+                <div class="container px-lg-5">
+                    <div class="row g-5 align-items-end">
+                        <div class="col-lg-6 text-center text-lg-start">
+                            <h1 class="text-white mb-4 animated slideInDown">Equal Education For Everyone!</h1>
+                            <p class="text-white pb-3 animated slideInDown">AIcademia stands as a beacon of educational equity, committed to breaking down barriers and ensuring every student has access to quality learning opportunities. Our mission is to empower learners worldwide, regardless of background or circumstance, by delivering a comprehensive range of educational resources and tools.</p>
+                            <a href="{{url_for('about')}}" class="btn btn-secondary py-sm-3 px-sm-5 rounded-pill me-3 animated slideInLeft">Read More</a>
+                        </div>
+                        <div class="col-lg-6 text-center text-lg-start">
+                            <img class="img-fluid rounded-pill zoomIn" src="{{ url_for('static', filename='img/equal_education.jpg') }}" alt="Hero Image">
                         </div>
                     </div>
                 </div>
@@ -100,54 +84,84 @@
         <!-- Navbar & Hero End -->
 
 
-        <!-- Contact Start -->
+        <!-- Feature Start -->
         <div class="container-xxl py-5">
             <div class="container py-5 px-lg-5">
-                <div class="wow fadeInUp" data-wow-delay="0.1s">
-                    <p class="section-title text-secondary justify-content-center"><span></span>Contact Us<span></span></p>
-                    <h1 class="text-center mb-5">Any Questions?</h1>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-7">
-                        <div class="wow fadeInUp" data-wow-delay="0.3s">
-                            <p class="text-center mb-4">The contact form is currently inactive. Get a functional and working contact form with Ajax & PHP in a few minutes. Just copy and paste the files, add a little code and you're done. <a href="https://htmlcodex.com/contact-form">Download Now</a>.</p>
-                            <form action="{{ url_for('send_email') }}" method="POST">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                            <label for="name">Your Name</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input name = "email" type="email" class="form-control" id="email" placeholder="Your Email">
-                                            <label for="email">Your Email</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <input name = "subject"type="text" class="form-control" id="subject" placeholder="Subject">
-                                            <label for="subject">Subject</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <textarea name = "message" class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
-                                            <label for="message">Message</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
-                                    </div>
-                                </div>
-                            </form>
+                <div class="row g-4">
+                    <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="feature-item bg-light rounded text-center p-4">
+                            <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
+                            <h5 class="mb-3">Digital Marketing</h5>
+                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="feature-item bg-light rounded text-center p-4">
+                            <i class="fa fa-3x fa-search text-primary mb-4"></i>
+                            <h5 class="mb-3">SEO & Backlinks</h5>
+                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="feature-item bg-light rounded text-center p-4">
+                            <i class="fa fa-3x fa-laptop-code text-primary mb-4"></i>
+                            <h5 class="mb-3">Design & Development</h5>
+                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Contact End -->
+        <!-- Feature End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl py-5">
+            <div class="container py-5 px-lg-5">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <p class="section-title text-secondary">About Us<span></span></p>
+                        <h1 class="mb-5">#1 Digital solution with 10 years of experience</h1>
+                        <p class="mb-4">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit clita duo justo eirmod magna dolore erat amet</p>
+                        <div class="skill mb-4">
+                            <div class="d-flex justify-content-between">
+                                <p class="mb-2">Digital Marketing</p>
+                                <p class="mb-2">85%</p>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="skill mb-4">
+                            <div class="d-flex justify-content-between">
+                                <p class="mb-2">SEO & Backlinks</p>
+                                <p class="mb-2">90%</p>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-secondary" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="skill mb-4">
+                            <div class="d-flex justify-content-between">
+                                <p class="mb-2">Design & Development</p>
+                                <p class="mb-2">95%</p>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-dark" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <a href="" class="btn btn-primary py-sm-3 px-sm-5 rounded-pill mt-3">Read More</a>
+                    </div>
+                    <div class="col-lg-6">
+                        <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="{{ url_for('static', filename='img/about.png') }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+
+        <!-- Team Start -->
+        <!-- Team End -->
         
 
         <!-- Footer Start -->
@@ -171,7 +185,7 @@
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                             &copy; <a class="border-bottom" href="#">AIcademia</a>, All Right Reserved. 
 							
-							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+	
 							Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
                         </div>
                         <div class="col-md-6 text-center text-md-end">
@@ -183,14 +197,14 @@
         <!-- Footer End -->
 
 
-
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-secondary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-        </div>
+    </div>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ url_for('static', filename='js/wow/wow.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/easing/easing.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/waypoints/waypoints.min.js') }}"></script>
@@ -198,6 +212,7 @@
     <script src="{{ url_for('static', filename='js/owlcarousel/owlcarousel.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/isotope/isotope.pkgd.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/lightbox/lightbox.min.js') }}"></script>
+
     <!-- Template Javascript -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>

@@ -1,2 +1,7 @@
-.history/
+env/
+pycache/
 secret.py
+app.log
+.history/
+.lh/
+>>>>>>> 591f3895abfbf37ef3b62a9efb84d23f7f172056

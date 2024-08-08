@@ -18,11 +18,11 @@ class User(db.Model):
     password = db.Column(db.String(50), nullable = False)
 
 
-@app.route('/index')
+@app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/', methods=["GET", "POST"])
+@app.route('/chatbot', methods=["GET", "POST"])
 def chatbot():
     global messages
 
@@ -109,9 +109,9 @@ def signup():
 def about():
     return render_template('about.html')
 
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
+@app.route('/donate')
+def donate():
+    return render_template('donate.html')
 
 @app.route('/project')
 def project():
