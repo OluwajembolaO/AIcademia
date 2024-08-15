@@ -79,22 +79,17 @@
                         <a href="{{ url_for('index') }}" class="nav-item nav-link">Home</a>
                         <a href="{{ url_for('about') }}" class="nav-item nav-link">About</a>
                         <a href="{{ url_for('service') }}" class="nav-item nav-link">Service</a>
-                        <a href="{{ url_for('project') }}" class="nav-item nav-link">Project</a>
-                        <a href="{{ url_for('team') }}" class="nav-item nav-link">Our Team</a>
                         <a href="{{ url_for('donate') }}" class="nav-item nav-link">Donate</a>
                     </div>
                     
                     <div class="navbar-nav ms-auto">
-                        {% if session.username %}
+                        
                         <div class="nav-item dropdown">
-                            <h1 class="nav-item nav-link" style = "font-size: 45px; margin-bottom: -15px;">{{ session.username|capitalize }}</h1>
+                            
                             <div class="dropdown-menu m-0">
-                                <a href="/logout" class="dropdown-item">Log Out</a>
+
                             </div>
                         </div>
-                        {% else %}
-                            <a href="#" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
-                        {% endif %}
                     </div>
                 </div>
             </nav>
@@ -115,17 +110,19 @@
         <!--BAR GRAPH START-->
         <div class="container">
             <div class="myContainer">
-                <h1 class="mt-5 mb-4" style="margin-left:200px;">Name Of Data</h1>
+                <h3 class="mt-5 mb-4" style="margin-left:1px;">Student Performance Across Subjects</h3>
+                <p class="" style="margin-left:1px;">Changes in average scores and scores at selected percentiles, by subject and grade</p>
                 <div class="row">
                     <div class="col-md-8">
                         <div class="chart-container">
-                            <canvas id="myChart" style="width: 100%; height: 400px;"></canvas>
+                            <img class="img-fluid shadow-lg mb-3" src="{{ url_for('static', filename='img/PROBLEM.png') }}">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="additional-info">
-                            <h1 class = "mb-4 ">The Pr0blem</h1>
-                            <p class = "pb-3">Many students arent able to get access to many education resources as other. According to the graph shown here it states(I Need Data!)</p>
+                            <h1 class = "mb-4 ">The Problem</h1>
+                            <p class = "pb-3">
+                                The data reveals a significant decline in student performance in mathematics and reading across grades 4 and 8 from 2019 to 2022. Scores and percentile performance have dropped across the board, except for the 90th percentile in 4th-grade reading, which remained stable. This downward trend is alarming, indicating that students are struggling more, potentially widening educational gaps and reducing overall academic preparedness. Urgent intervention is needed to address these declines and support students effectively.</p>
                         </div>
                     </div>
                 </div>
@@ -140,56 +137,7 @@
         </style>
         
         
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var ctx = document.getElementById('myChart').getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                        datasets: [{
-                            label: '# of Votes',
-                            data: [12, 19, 3, 5, 2, 3],
-                            backgroundColor: [
-                                'rgba(0, 75, 243, 0.4)',
-                                'rgba(0, 75, 243, 0.4)',
-                                'rgba(0, 75, 243, .4)',
-                                'rgba(0, 75, 243, .4)',
-                                'rgba(0, 75, 243, .4)',
-                                'rgba(0, 75, 243, .4)'
-                            ],
-                            borderColor: [
-                                'rgba(0, 0, 0, .6)',
-                                'rgba(0, 0, 0, .6)',
-                                'rgba(0, 0, 0, .6)',
-                                'rgba(0, 0, 0, .6)',
-                                'rgba(0, 0, 0, .6)',
-                                'rgba(0, 0, 0, .6)'
-                            ],
-                            borderWidth: 3
-                        }]
-                    },
-                    options: {
-                        animation: {
-                            duration: 2000, // Animation duration in milliseconds
-                            easing: 'easeInOutQuad', // Easing function to control animation
-                        },
-                        scales: {
-                            yAxes: [{
-                                scaleLabel: {
-                                display: true,
-                                labelString: '# of Votes' // Label for Y-axis
-                            },
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        }
-                    }
-                });
-            });
-        </script>
+            
         <!-- BAR GRAPH END-->
 
         <!-- Feature Start -->
@@ -198,25 +146,29 @@
                 <div class="row g-4">
                     <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="feature-item bg-light rounded text-center p-4">
-                            <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
-                            <h5 class="mb-3">Digital Marketing</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <i class="fa fa-3x text-primary fa-book mb-4"></i>
+                            <h5 class="mb-3">Lack Of Resorces</h5>
+                            <p class="m-0">Many students and schools struggle with a lack of resources, such as up-to-date technology, textbooks, and funding, which hinders their ability to provide a quality education.</p>
                         </div>
                     </div>
-                    <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="feature-item bg-light rounded text-center p-4">
-                            <i class="fa fa-3x fa-search text-primary mb-4"></i>
-                            <h5 class="mb-3">SEO & Backlinks</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                        </div>
-                    </div>
+
                     <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="feature-item bg-light rounded text-center p-4">
                             <i class="fa-solid fa-3x fa-scale-unbalanced text-primary mb-4"></i>
-                            <h5 class="mb-3">Design & Development</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <h5 class="mb-3">Unequal Education Access</h5>
+                            <p class="m-0">Unequal access to education remains a significant issue, with disparities in funding, resources, and opportunities creating a gap between students from different socioeconomic backgrounds.</p>
                         </div>
                     </div>
+
+                    <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="feature-item bg-light rounded text-center p-4">
+                            <i class="fa fa-3x fa-school text-primary mb-4"></i>
+                            <h5 class="mb-3">School Completion</h5>
+                            <p class="m-0">
+                                Students from low-income backgrounds are less likely to complete college due to financial challenges and limited access to support resources.</p>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -228,37 +180,14 @@
             <div class="container py-5 px-lg-5">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <p class="section-title text-secondary">About Us<span></span></p>
-                        <h1 class="mb-5">#1 Digital solution with 10 years of experience</h1>
-                        <p class="mb-4">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore. Clita erat ipsum et lorem et sit, sed stet no labore lorem sit clita duo justo eirmod magna dolore erat amet</p>
-                        <div class="skill mb-4">
-                            <div class="d-flex justify-content-between">
-                                <p class="mb-2">Digital Marketing</p>
-                                <p class="mb-2" >85%</p>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="skill mb-4">
-                            <div class="d-flex justify-content-between">
-                                <p class="mb-2">SEO & Backlinks</p>
-                                <p class="mb-2">90%</p>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar bg-secondary" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <div class="skill mb-4">
-                            <div class="d-flex justify-content-between">
-                                <p class="mb-2">Design & Development</p>
-                                <p class="mb-2">95%</p>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar bg-dark" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
-                        <a href="" class="btn btn-primary py-sm-3 px-sm-5 rounded-pill mt-3">Read More</a>
+                        <p class="section-title text-secondary">Our Mission<span></span></p>
+                        <h1 class="mb-5">Equal Education For All!</h1>
+                        <p class="mb-4">AIcademia is dedicated to promoting educational equity by 
+                            dismantling barriers and providing every student with access 
+                            to quality learning opportunities. Our mission is to empower 
+                            learners everywhere, regardless of their background or circumstances, 
+                            through a wide array of educational resources and tools.
+                        </p>
                     </div>
                     <div class="col-lg-6">
                         <img class="img-fluid wow zoomIn" data-wow-delay="0.5s" src="{{ url_for('static', filename='img/about.png') }}">
@@ -267,6 +196,99 @@
             </div>
         </div>
         <!-- About End -->
+        <!-- Team Start -->
+        <div class="container-xxl py-5">
+            <div class="container py-5 px-lg-5">
+                <div class="wow fadeInUp" data-wow-delay="0.1s">
+                    <p class="section-title text-secondary justify-content-center"><span></span>Our Team<span></span></p>
+                    <h1 class="text-center mb-5">Our Team Members</h1>
+                </div>
+
+                <div class="row g-4">
+
+                    <div class="col-lg-4 col-md-6 bg-light shadow wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="team-item bg-light rounded">
+                            <div class="text-center border-bottom p-4">
+                                <img class="img-fluid rounded-circle shadow-lg mb-3" src="{{ url_for('static', filename='img/team_members/Oluwajembola.jfif') }}" alt="">
+                                <h5>Oluwajembola Orioke</h5>
+                                <span>Software Engineer</span>
+                            </div>
+                            <div class="d-flex justify-content-center p-4">
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="team-item bg-light rounded">
+                            <div class="text-center border-bottom p-4">
+                                <img class="img-fluid rounded-circle shadow-lg mb-3" src="{{ url_for('static', filename='img/team_members/Ahmad2.jfif') }}" alt="">
+                                <h5>Muhammad Ahmad</h5>
+                                <span>Software Engineer</span>
+                            </div>
+                            <div class="d-flex justify-content-center p-4">
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="team-item bg-light rounded">
+                            <div class="text-center border-bottom p-4">
+                                <img class="img-fluid rounded-circle shadow-lg mb-3" src="{{ url_for('static', filename='img/team_members/Shannon.jfif') }}" alt="">
+                                <h5>Zoi Shannon</h5>
+                                <span>Data Analyst</span>
+                            </div>
+                            <div class="d-flex justify-content-center p-4">
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="team-item bg-light rounded">
+                            <div class="text-center border-bottom p-4">
+                                <img style = "width: 275px; height: 275px;"class="img-fluid rounded-circle shadow-lg mb-3" src="{{ url_for('static', filename='img/team_members/Siddh.jpg') }}" alt="">
+                                <h5>Siddh Gohel</h5>
+                                <span>Marketing Manager</span>
+                            </div>
+                            <div class="d-flex justify-content-center p-4">
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="team-item bg-light rounded">
+                            <div class="text-center border-bottom p-4">
+                                <img class="img-fluid rounded-circle shadow-lg mb-3" src="{{ url_for('static', filename='img/team_members/Milan.jfif') }}" alt="">
+                                <h5>Milan Gittens</h5>
+                                <span>Product Designer</span>
+                            </div>
+                            <div class="d-flex justify-content-center p-4">
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                <a class="btn btn-square mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Team End -->
 
 
         <!-- Footer Start -->

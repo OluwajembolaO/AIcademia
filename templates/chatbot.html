@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Message Example</title>
-    <link href="{{ url_for('static', filename = 'css/chatbot.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/chatbot.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="chat-container">
         <div class="chat-header">
-            <h1>Chat Interface</h1>
+            <h1>Tutor Bot</h1>
         </div>
         <div class="chat-box">
             <div class="message-list">
@@ -29,38 +29,65 @@
         <form id="chat-form">
             <input type="text" id="user-input" name="user_input" placeholder="Type your message here..." required>
             <button type="submit">Send</button>
+            <button type="button" id="start-recording">🎤</button> <!-- Button for speech recognition -->
         </form>
     </div>
     <script>
-        document.getElementById('chat-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    let userInput = document.getElementById('user-input').value;
+        // Check for Web Speech API support
+        if (!('webkitSpeechRecognition' in window)) {
+            alert('Speech recognition not supported in this browser.');
+        } else {
+            const recognition = new webkitSpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.continuous = false;
+            recognition.interimResults = false;
 
-    fetch('/', {  // Ensure this URL matches your Flask route
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({ 'user_input': userInput })
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+            // Event listener for when speech recognition results are available
+            recognition.onresult = function(event) {
+                const userInput = event.results[0][0].transcript;
+                document.getElementById('user-input').value = userInput;
+                document.getElementById('chat-form').dispatchEvent(new Event('submit')); // Submit the form
+            };
+
+            // Event listener for when speech recognition ends
+            recognition.onend = function() {
+                document.getElementById('start-recording').disabled = false; // Re-enable the button
+            };
+
+            document.getElementById('start-recording').addEventListener('click', function() {
+                recognition.start();
+                this.disabled = true; // Disable the button while recording
+            });
         }
-        return response.json();
-    })
-    .then(data => {
-        let messageList = document.querySelector('.message-list');
-        messageList.innerHTML += '<div class="message user-message"><p>'+ userInput +'</p></div>';
-        messageList.innerHTML += '<div class="message assistant-message"><p>' +data.response+ '</p></div>';
-        document.getElementById('user-input').value = '';
-        messageList.scrollTop = messageList.scrollHeight; // Scroll to bottom
-    })
-    .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-    });
-});
 
+        document.getElementById('chat-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let userInput = document.getElementById('user-input').value;
+
+            fetch('/chatbot', {  // Ensure this URL matches your Flask route
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({ 'user_input': userInput })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                let messageList = document.querySelector('.message-list');
+                messageList.innerHTML += '<div class="message user-message"><p>' + userInput + '</p></div>';
+                messageList.innerHTML += '<div class="message assistant-message"><p>' + data.response + '</p></div>';
+                document.getElementById('user-input').value = '';
+                messageList.scrollTop = messageList.scrollHeight; // Scroll to bottom
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+        });
     </script>
 </body>
 </html>

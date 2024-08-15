@@ -35,6 +35,19 @@ def getResponse(prompt):
 # Specify the path to tesseract executable if it is not in your PATH
 # pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'  # Windows example
 
+def getResponse(prompt):
+        response = openai_client.chat.completions.create(
+                model=MODEL_NAME,
+                messages=[
+                    {"role": "system", "content": f"Your goal is to get the input and exsplain the input to the best of your ability. Make sure to not give the answer to the question however summerize the text to the best of your ability. I want you to write me a paragraph exsplaning why this is correct."},
+                    {"role": "user", "content": prompt}
+                ],
+                max_tokens=500
+            )
+        ai_responce = (response.choices[0].message.content)
+
+        return ai_responce
+
 def imageToText_Depreciated(path):
     image = Image.open(path)
     #image = Image.open(io.BytesIO(path.read()))

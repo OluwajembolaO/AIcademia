@@ -4,14 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image to Text</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+
+        .result img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .result p {
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-    <h1>Upload Image to Extract Text</h1>
-    <form action="/upload2" method="post" enctype="multipart/form-data">
-        <label for="file">Select image:</label>
-        <input type="file" id="file" name="file" accept="image/*" required>
-        <button type="submit">Upload</button>
-    </form>
+    <div class="form-container">
+        <h1>Upload Image to Extract Text</h1>
+        <form action="/upload2" method="post" enctype="multipart/form-data">
+            <label for="file">Select image:</label>
+            <input type="file" id="file" name="file" accept="image/*" required>
+            <button type="submit">Upload</button>
+        </form>
+
+        {% if image_url and responce %}
+            <div class="result">
+                <h2>Uploaded Image:</h2>
+                <img src="{{ url_for('static', filename='img/uploads/' + image_url) }}" alt="Uploaded Image">
+                <h2>Our Responce</h2>
+                <p>{{ responce }}</p>
+            </div>
+        {% endif %}
+    </div>
 </body>
 </html>
-

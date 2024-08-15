@@ -57,22 +57,17 @@
                         <a href="{{ url_for('index') }}" class="nav-item nav-link">Home</a>
                         <a href="{{ url_for('about') }}" class="nav-item nav-link">About</a>
                         <a href="{{ url_for('service') }}" class="nav-item nav-link">Service</a>
-                        <a href="{{ url_for('project') }}" class="nav-item nav-link">Project</a>
-                        <a href="{{ url_for('team') }}" class="nav-item nav-link">Our Team</a>
-                        <a href="{{ url_for('contact') }}" class="nav-item nav-link">Contact</a>
+                        <a href="{{ url_for('donate') }}" class="nav-item nav-link">Donate</a>
                     </div>
                     
                     <div class="navbar-nav ms-auto">
-                        {% if session.username %}
+                        
                         <div class="nav-item dropdown">
-                            <h1 class="nav-item nav-link" style = "font-size: 45px; margin-bottom: -15px;">{{ session.username|capitalize }}</h1>
+                            
                             <div class="dropdown-menu m-0">
-                                <a href="/logout" class="dropdown-item">Log Out</a>
+
                             </div>
                         </div>
-                        {% else %}
-                            <a href="#" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
-                        {% endif %}
                     </div>
                 </div>
             </nav>
@@ -81,15 +76,8 @@
                 <div class="container my-5 py-5 px-lg-5">
                     <div class="row g-5 py-5">
                         <div class="col-12 text-center">
-                            <h1 class="text-white animated slideInDown">Service</h1>
+                            <h1 class="text-white animated slideInDown" style="font-size:4em">Service</h1>
                             <hr class="bg-white mx-auto mt-0" style="width: 90px;">
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb justify-content-center">
-                                    <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-                                    <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-                                    <li class="breadcrumb-item text-white active" aria-current="page">Service</li>
-                                </ol>
-                            </nav>
                         </div>
                     </div>
                 </div>
@@ -108,41 +96,68 @@
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item d-flex flex-column text-center rounded">
+                            <h2> Demo </h2>
                             <div class="service-icon flex-shrink-0">
                                 <i class="fa fa-search fa-2x"></i>
                             </div>
-                            <h5 class="mb-3">Tutor Bot</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                            <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                            <h3 class="mb-3">Tutor Bot</h3>
+                            
+                            <p class="m-0">A dedicated educational assistant available 24/7, offering free and personalized support to all K-12 students.</p>
+                            <a class="btn btn-square" target='_blank' href="{{ url_for('form') }}"><i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
+
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                         <div class="service-item d-flex flex-column text-center rounded">
+                            <h2> Demo </h2>
                             <div class="service-icon flex-shrink-0">
-                                <i class="fa fa-laptop-code fa-2x"></i>
+                                
+                                <i class="fa fa-2x fa-camera"></i>
                             </div>
-                            <h5 class="mb-3">Image Reco</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
-                            <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                            <h3 class="mb-3">Image Reco</h3>
+                            <p class="m-0">Allows students to easily capture photos of their assignments and receive instant, detailed explanations to aid their understanding.</p>
+                            <a class="btn btn-square" target='_blank' href="{{ url_for('upload') }}"><i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
+
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item d-flex flex-column text-center rounded">
                             <div class="service-icon flex-shrink-0">
                                 <i class="fa fa-mail-bulk fa-2x"></i>
                             </div>
-                            <h5 class="mb-3">Hardware</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <h3 class="mb-3">Practice Quizes</h3>
+                            <p class="m-0">Allows students to test their knowledge with customized quizzes that adapt to their learning progress.
+                            </p>
                             <a class="btn btn-square" href="/project"><i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
+
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                         <div class="service-item d-flex flex-column text-center rounded">
                             <div class="service-icon flex-shrink-0">
                                 <i class="fab fa-android fa-2x"></i>
                             </div>
-                            <h5 class="mb-3">App Development</h5>
-                            <p class="m-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                            <h3 class="mb-3">App Development</h3>
+                            <h4>Coming Soon!!!</h4>
+                            <p class="m-0">
+                                Keep students energized and focused on their educational journey. By offering tailored encouragement, practical study tips, and stress-relief techniques.
+                            </p>
+
+                                <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="service-item d-flex flex-column text-center rounded">
+                            <div class="service-icon flex-shrink-0">
+                                <i class="fa fa-laptop-code fa-2x"></i>
+                            </div>
+                            <h3 class="mb-3">Personal Motivator</h3>
+                            <h4>Coming Soon!!!</h4>
+                            <p class="m-0">
+                                Brings education directly to students' fingertips with seamless mobile applications.
+                            </p>
+                            <p>Coming Soon!!!</p>
                             <a class="btn btn-square" href=""><i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
