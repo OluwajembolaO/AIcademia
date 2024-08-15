@@ -16,11 +16,11 @@
                 {% for message in messages %}
                     {% if message.role == 'user' %}
                         <div class="message user-message">
-                            <p>{{message.content}}</p>
+                            <h3>{{message.content}}</h3>
                         </div>
                     {% else %}
                         <div class="message assistant-message">
-                            <p>{{message.content}}</p>
+                            <h3>{{message.content}}</h3>
                         </div>
                     {% endif %}
                 {% endfor %}
@@ -79,8 +79,8 @@
             })
             .then(data => {
                 let messageList = document.querySelector('.message-list');
-                messageList.innerHTML += '<div class="message user-message"><p>' + userInput + '</p></div>';
-                messageList.innerHTML += '<div class="message assistant-message"><p>' + data.response + '</p></div>';
+                messageList.innerHTML += '<div class="message user-message"><h3>' + userInput + '</h3></div>';
+                messageList.innerHTML += '<div class="message assistant-message"><h3>' + data.response + '</h3></div>';
                 document.getElementById('user-input').value = '';
                 messageList.scrollTop = messageList.scrollHeight; // Scroll to bottom
             })
